@@ -35,7 +35,7 @@ public class ServerJSON {
 		map.put("port", server.getPort());
 		map.put("version", server.getVersion());
 		map.put("shutdown-message", ChatColor.stripColor(server.getShutdownMessage()));
-		map.put("motd", ChatColor.stripColor(server.getShutdownMessage()));
+		map.put("motd", ChatColor.stripColor(server.getMotd()));
 		map.put("world-type", server.getWorldType());
 		map.put("allow-nether", server.getAllowNether());
 		map.put("allow-end", server.getAllowEnd());
@@ -95,7 +95,7 @@ public class ServerJSON {
 		}
 		
 		JSONObject activeWorlds = new JSONObject();
-		ipBanJSON.putAll(worlds);		
+		activeWorlds.putAll(worlds);		
 		map.put("active-worlds", activeWorlds);
 		
 	    JSON.put(server.getServerId(), map);
