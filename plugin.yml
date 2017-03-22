@@ -1,0 +1,4 @@
+name: Players2JSON
+main: wa.was.spigot2json.Spigot2JSON
+version: 0.1
+depend: [SpigotHttpServer]
