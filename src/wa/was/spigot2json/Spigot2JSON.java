@@ -7,15 +7,21 @@ import wa.was.webserver.lib.SHSTags;
 
 import wa.was.spigot2json.events.JoinExitListeners;
 import wa.was.spigot2json.util.PlayerJSON;
+import wa.was.spigot2json.util.ServerJSON;
 
 public class Spigot2JSON extends JavaPlugin {
 	
     @Override
     public void onEnable() {
     	
-    	// If json_users_online hasn't been entered, do so
+    	// If json-users-online hasn't been entered, do so
     	if ( ! ( SHSTags.containsType("json-users-online") ) ) {  		
     		SHSTags.addReplacement("json-users-online", "{}");    		
+    	}
+    	
+    	// If json-server-info hasn't been entered, do so
+    	if ( ! ( SHSTags.containsType("json-server-info") ) ) {  		
+    		SHSTags.addReplacement("json-server-info", "{}");    		
     	}
     	
     	// Register Join/Exit Listner
@@ -23,6 +29,8 @@ public class Spigot2JSON extends JavaPlugin {
     	
     	// Initiate PlayerJSON system
     	new PlayerJSON();
+    	// Initiate ServerJSON system
+    	new ServerJSON();
     	
     }
 

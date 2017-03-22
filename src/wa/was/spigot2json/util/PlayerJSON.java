@@ -1,7 +1,6 @@
 package wa.was.spigot2json.util;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,8 +14,6 @@ import wa.was.webserver.lib.SHSTags;
 public class PlayerJSON {
 	
 	private static JSONObject JSON;
-	public static HashMap<UUID, HashMap<String, String>> playerMap 
-	= new HashMap<UUID, HashMap<String, String>>();
 	
 	public PlayerJSON() {
 		JSON = new JSONObject();
@@ -29,19 +26,19 @@ public class PlayerJSON {
 		for (Player player : Bukkit.getServer().getOnlinePlayers()) {
 			
 			AttributeInstance playerMaxHealth  = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-			HashMap<String, String> map = new HashMap<String, String>();
+			HashMap<String, Object> map = new HashMap<String, Object>();
 			
 			map.put("name", player.getName());
-			map.put("displayname", ChatColor.stripColor(player.getDisplayName()));
-			map.put("gamemode", ""+player.getGameMode());
+			map.put("display-name", ChatColor.stripColor(player.getDisplayName()));
+			map.put("gamemode", player.getGameMode().toString());
 			map.put("player-op", ( player.isOp() ? "true" : "false" ));
 			map.put("health", ""+player.getHealth());
-			map.put("max-health", ""+playerMaxHealth.getBaseValue());
-			map.put("food-level", ""+player.getFoodLevel());
-			map.put("exhaustion", ""+player.getExhaustion());
-			map.put("experience", ""+player.getExp());
-			map.put("experience-level", ""+player.getExpToLevel());
-			map.put("first-played", ""+player.getFirstPlayed());
+			map.put("max-health", playerMaxHealth.getBaseValue());
+			map.put("food-level", player.getFoodLevel());
+			map.put("exhaustion", player.getExhaustion());
+			map.put("experience", player.getExp());
+			map.put("experience-level", player.getExpToLevel());
+			map.put("first-played", player.getFirstPlayed());
 			
 			JSONObject playerJSON = new JSONObject();
 			playerJSON.putAll(map);
