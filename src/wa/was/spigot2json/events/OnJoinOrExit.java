@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import wa.was.webserver.lib.SHSTags;
 
-public class JoinExitListeners implements Listener {
+public class OnJoinOrExit implements Listener {
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {

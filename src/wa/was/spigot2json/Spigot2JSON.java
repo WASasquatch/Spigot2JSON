@@ -5,7 +5,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 // Import SHS Tags
 import wa.was.webserver.lib.SHSTags;
 
-import wa.was.spigot2json.events.JoinExitListeners;
+import wa.was.spigot2json.events.OnJoinOrExit;
+import wa.was.spigot2json.events.OnPlayerDeath;
+import wa.was.spigot2json.util.DeathsJSON;
 import wa.was.spigot2json.util.PlayerJSON;
 import wa.was.spigot2json.util.ServerJSON;
 
@@ -24,13 +26,24 @@ public class Spigot2JSON extends JavaPlugin {
     		SHSTags.addReplacement("json-server-info", "{}");    		
     	}
     	
-    	// Register Join/Exit Listner
-    	getServer().getPluginManager().registerEvents(new JoinExitListeners(), this); 
+    	// If json-recent-deaths hasn't been entered, do so
+    	if ( ! ( SHSTags.containsType("json-recent-deaths") ) ) {  		
+    		SHSTags.addReplacement("json-recent-deaths", "{}");    		
+    	}
     	
-    	// Initiate PlayerJSON system
-    	new PlayerJSON();
+    	// Register Join/Exit Listner
+    	getServer().getPluginManager().registerEvents(new OnJoinOrExit(), this); 
+    	
+    	// Register Death Listener
+    	getServer().getPluginManager().registerEvents(new OnPlayerDeath(), this); 
+    	
     	// Initiate ServerJSON system
     	new ServerJSON();
+    	// Initiate PlayerJSON system
+    	new PlayerJSON();
+    	// Initiate DeathsJSON system
+    	new DeathsJSON();
+
     	
     }
 
