@@ -9,14 +9,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 
-import wa.was.spigot2json.events.OnPlayerDeath;
+import wa.was.spigot2json.events.OnPlayerKill;
 import wa.was.webserver.lib.SHSTags;
 
-public class DeathsJSON {
+public class KillsJSON {
 	
 	private static JSONObject JSON;
 	
-	public DeathsJSON() {
+	public KillsJSON() {
 		JSON = new JSONObject();
 		updateJSON();
 	}
@@ -27,29 +27,29 @@ public class DeathsJSON {
 		
 		JSONObject playerJSON = new JSONObject();
 		
-		if ( OnPlayerDeath.cache.size() > 0 ) {
+		if ( OnPlayerKill.cache.size() > 0 ) {
 		
-			for (Map.Entry<Long, List<Object>> entry : OnPlayerDeath.cache.entrySet()) {
+			for (Map.Entry<Long, List<Object>> entry : OnPlayerKill.cache.entrySet()) {
 				
 				HashMap<String, Object> playerMap = new HashMap<String, Object>();
-				JSONObject deathJSON = new JSONObject();
+				JSONObject killJSON = new JSONObject();
 				
 				List<Object> list = entry.getValue();
 				
 				Player player = Bukkit.getServer().getPlayer((UUID)list.get(0));
 				long timestamp = (long) entry.getKey();
-				String reason = list.get(1).toString();
+				String event = list.get(1).toString();
 					
-				playerMap.put(player.getName(), reason);
+				playerMap.put(player.getName(), event);
 					
-				deathJSON.putAll(playerMap);
-				playerJSON.put(timestamp, deathJSON);
+				killJSON.putAll(playerMap);
+				playerJSON.put(timestamp, killJSON);
 			    
 			}
 		
 		}
 		
-	    JSON.put("latest-deaths", playerJSON);
+	    JSON.put("latest-kills", playerJSON);
 	    setSHSTag();
 	    
 	}
@@ -63,7 +63,7 @@ public class DeathsJSON {
 	}
 	
 	public static void setSHSTag() {
-		SHSTags.addReplacement("json-recent-deaths", getJSON());
+		SHSTags.addReplacement("json-recent-kills", getJSON());
 	}
 
 }

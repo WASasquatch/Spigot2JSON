@@ -18,11 +18,11 @@ public class ServerJSON {
 	
 	public ServerJSON() {
 		JSON = new JSONObject();
-		updateServerJSON();
+		updateJSON();
 	}	
 
 	@SuppressWarnings("unchecked")
-	public static void updateServerJSON() {
+	public static void updateJSON() {
 		
 		Server server = Bukkit.getServer();
 		
@@ -75,8 +75,8 @@ public class ServerJSON {
 			JSONObject banEntry = new JSONObject();
 			HashMap<String, Object> banMap = new HashMap<String, Object>();
 			banMap.put("ban-created", ban.getCreated().toString());
-			banMap.put("ban-source", ChatColor.stripColor(ban.getSource()));
-			banMap.put("ban-reason", ban.getReason());
+			banMap.put("ban-source", ChatColor.stripColor(ban.getSource().toString()));
+			banMap.put("ban-reason", ban.getReason().toString());
 			banMap.put("ban-expiration", ban.getExpiration());
 			banEntry.putAll(banMap);
 			bans.put(ChatColor.stripColor(ban.getTarget()), banEntry);

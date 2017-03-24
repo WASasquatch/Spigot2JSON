@@ -1,4 +1,4 @@
 name: Spigot2JSON
 main: wa.was.spigot2json.Spigot2JSON
-version: 0.3
+version: 0.6
 depend: [SpigotHttpServer]
