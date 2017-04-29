@@ -11,6 +11,7 @@ import wa.was.spigot2json.events.OnPlayerEntityInteract;
 import wa.was.spigot2json.events.OnPlayerInteract;
 import wa.was.spigot2json.events.OnPlayerKill;
 import wa.was.spigot2json.events.OnTeleport;
+
 import wa.was.spigot2json.util.DeathsJSON;
 import wa.was.spigot2json.util.InteractEntityJSON;
 import wa.was.spigot2json.util.InteractJSON;
@@ -65,7 +66,7 @@ public class Spigot2JSON extends JavaPlugin {
     		SHSTags.addReplacement("json-recent-entity-interactions", "{}");    		
     	}
     	
-    	// Register Join/Exit Listner
+    	// Register Join/Exit Listener
     	getServer().getPluginManager().registerEvents(new OnJoinOrExit(), this); 
     	
     	// Register Death Listener
